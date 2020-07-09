@@ -43,7 +43,9 @@ pipeline {
             }
          }
       }
-       post {
+       
+   }
+   post {
         any {
             emailext body: 'Pipeline code testing with email service', recipientProviders: [
                 [$class: 'DevelopersRecipientProvider'],
@@ -51,5 +53,4 @@ pipeline {
             ], subject: 'PipelineScript Email Testing'
         }
     }
-   }
 }

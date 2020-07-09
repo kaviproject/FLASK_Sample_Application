@@ -24,5 +24,32 @@ pipeline {
             """)
          }
       }
+      stage('Approve PROD Deploy') {
+         when {
+            branch 'origin/master'
+         }
+         options {
+            timeout(time: 1, unit: 'HOURS') 
+         }
+         steps {
+            input message: "Deploy?"
+         }
+         post {
+            success {
+               echo "Production Deploy Approved"
+            }
+            aborted {
+               echo "Production Deploy Denied"
+            }
+         }
+      }
+       post {
+        any {
+            emailext body: 'Pipeline code testing with email service', recipientProviders: [
+                [$class: 'DevelopersRecipientProvider'],
+                [$class: 'RequesterRecipientProvider']
+            ], subject: 'PipelineScript Email Testing'
+        }
+    }
    }
 }

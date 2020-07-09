@@ -46,7 +46,7 @@ pipeline {
        
    }
    post {
-        any {
+        always {
             emailext body: 'Pipeline code testing with email service', recipientProviders: [
                 [$class: 'DevelopersRecipientProvider'],
                 [$class: 'RequesterRecipientProvider']

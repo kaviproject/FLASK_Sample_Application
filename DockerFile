@@ -5,6 +5,7 @@ FROM python:3.7
 LABEL Name=sample_Flask_Application Version=0.0.2
 EXPOSE 8080
 EXPOSE 8888
+
 #WORKDIR /app
 #ADD . /app
 
@@ -14,7 +15,7 @@ COPY . /app
 
 RUN pip install --upgrade pip 
 
-RUN  pip install flask && \
+RUN pip install flask && \
     pip install flask_restful
  
     

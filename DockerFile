@@ -1,0 +1,21 @@
+FROM python:3.7
+# If you prefer miniconda:
+#FROM continuumio/miniconda3
+
+LABEL Name=sample_Flask_Application Version=0.0.2
+EXPOSE 8080
+EXPOSE 8888
+#WORKDIR /app
+#ADD . /app
+
+# Copy app dir and set work directory
+WORKDIR /app
+COPY . /app
+
+RUN pip install --upgrade pip 
+
+RUN  pip install flask && \
+    pip install flask_restful
+ 
+    
+CMD ["python", "main.py"]

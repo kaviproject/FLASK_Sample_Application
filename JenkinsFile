@@ -1,0 +1,3 @@
+docker image build -t smapleapplication:latest .
+docke tag smapleapplication docker-reg.cmog.org/smapleapplication:latest
+docker push docker-reg.cmog.org/smapleapplication:latest

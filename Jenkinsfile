@@ -23,7 +23,10 @@ pipeline {
       }
       stage('Approve PROD Deploy') {
          when {
-            branch 'origin/master'
+            expression {
+        return env.BRANCH_NAME == 'origin/master';
+            }
+            //branch 'origin/master'
          }
          options {
             timeout(time: 1, unit: 'HOURS') 

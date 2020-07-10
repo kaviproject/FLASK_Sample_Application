@@ -14,7 +14,6 @@ pipeline {
          steps {
             powershell(script: 'docker images -a')
             powershell(script: """
-               cd FLASK_Sample_Application/
                docker images -a
                docker image build -t smapleapplication:latest .
                docker tag smapleapplication docker-reg.cmog.org/smapleapplication:latest

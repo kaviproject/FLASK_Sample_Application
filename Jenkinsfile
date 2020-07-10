@@ -18,8 +18,6 @@ pipeline {
                docker image build -t smapleapplication:latest .
                docker tag smapleapplication docker-reg.cmog.org/smapleapplication:latest
                docker push docker-reg.cmog.org/smapleapplication:latest
-               docker images -a
-               cd ..
             """)
          }
       }

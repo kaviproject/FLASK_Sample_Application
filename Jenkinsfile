@@ -24,7 +24,7 @@ pipeline {
       stage('Approve PROD Deploy') {
          when {
             expression {
-        return env.BRANCH_NAME == 'origin/master';
+        return env.BRANCH_NAME != 'master';
             }
             //branch 'origin/master'
          }

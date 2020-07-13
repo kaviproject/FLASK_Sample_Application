@@ -13,13 +13,19 @@ pipeline {
          steps {   
             script{
                docker.withServer('tcp://172.17.105.12:2375') {
+                  
+                 bat 'docker images -a'
+                 bat 'docker image build -t smapleapplication:latest .'
+                 bat 'docker tag smapleapplication docker-reg.cmog.org/smapleapplication:latest'
+                 bat 'docker push docker-reg.cmog.org/smapleapplication:latest'
+                  
                //bat 'docker images -a'
-               powershell(script: """
+              /* powershell(script: """
                docker images -a
                docker image build -t smapleapplication:latest .
                docker tag smapleapplication docker-reg.cmog.org/smapleapplication:latest
                docker push docker-reg.cmog.org/smapleapplication:latest
-            """)
+            """)*/
              }
             }
             

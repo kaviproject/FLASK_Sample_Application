@@ -53,6 +53,8 @@ pipeline {
             {
              def image_id = registry + ":$BUILD_NUMBER"
              echo '$image_id'
+             //Ansible playbook script
+             
             }
 
          }

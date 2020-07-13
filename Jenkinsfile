@@ -10,68 +10,21 @@ pipeline {
          }
       }
       stage('Docker Build') {
-         steps {
-            script
-            {
-               docker.withServer('tcp://172.17.105.12:2375', 'IT_Docker_Host') 
+         steps {   
+               withDockerRegistry(credentialsId: '5f8f9d48-44d9-4872-b854-f8f6cff73aea', url: 'https://docker-reg.cmog.org') {
+              bat 'docker images -a'
              }
-            }
             
-            powershell(script: 'docker images -a')
+            
+            /*powershell(script: 'docker images -a')
             powershell(script: """
                docker images -a
                docker image build -t smapleapplication:latest .
                docker tag smapleapplication docker-reg.cmog.org/smapleapplication:latest
                docker push docker-reg.cmog.org/smapleapplication:latest
-            """)
+            """)*/
          }
       }
-      stage('Approve PROD Deploy') {
-         when {
-            expression {
-            env.GIT_BRANCH == 'origin/master'
-            //return env.BRANCH_NAME != 'master';
-            }
-            //branch 'origin/master'
-         }
-         options {
-            timeout(time: 1, unit: 'HOURS') 
-         }
-         steps {
-            input message: "Can I Deploy into PROD?"
-         }
-         post {
-            success {
-               echo "Production Deploy Approved"
-            }
-            aborted {
-               echo "Production Deploy Denied"
-            }
-         }
-      }
-     stage('Deploy')
-      {
-      environment {
-       registry = "magalixcorp/k8scicd"
-         }
-         steps{
-            script
-            {
-             def image_id = registry + ":$BUILD_NUMBER"
-             echo '$image_id'
-             //Ansible playbook script
-             
-            }
-
-         }
-      }      
-   }
-   post {
-        always {
-            emailext body: 'Pipeline code testing with email service', recipientProviders: [
-                [$class: 'DevelopersRecipientProvider'],
-                [$class: 'RequesterRecipientProvider']
-            ], subject: 'PipelineScript Email Testing'
-        }
+     
     }
 }

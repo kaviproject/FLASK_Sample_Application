@@ -11,6 +11,12 @@ pipeline {
       }
       stage('Docker Build') {
          steps {
+            script
+            {
+               docker.withServer('tcp://172.17.105.12:2375', 'IT_Docker_Host') 
+             }
+            }
+            
             powershell(script: 'docker images -a')
             powershell(script: """
                docker images -a

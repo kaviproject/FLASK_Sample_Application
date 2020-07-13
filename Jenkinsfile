@@ -11,7 +11,7 @@ pipeline {
       }
       stage('Docker Build') {
          steps {   
-               withDockerRegistry(credentialsId: '5f8f9d48-44d9-4872-b854-f8f6cff73aea', url: 'https://docker-reg.cmog.org') {
+               docker.withserver('tcp://172.17.105.12:2375', '5f8f9d48-44d9-4872-b854-f8f6cff73aea') {
               bat 'docker images -a'
              }
             

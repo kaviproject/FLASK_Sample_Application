@@ -12,7 +12,7 @@ pipeline {
       stage('Docker Build') {
          steps {   
             script{
-               docker.withserver('tcp://172.17.105.12:2375') {
+               docker.withServer('tcp://172.17.105.12:2375') {
               bat 'docker images -a'
              }
             }

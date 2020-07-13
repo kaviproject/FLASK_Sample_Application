@@ -43,7 +43,7 @@ pipeline {
             }
          }
       }
-      stage('Deploy')
+     /* stage('Deploy')
       {
          environment {
        registry = "magalixcorp/k8scicd"
@@ -56,7 +56,7 @@ pipeline {
             }
 
          }
-      }
+      }*/
        
    }
    post {

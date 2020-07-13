@@ -1,12 +1,11 @@
-/*docker image build -t smapleapplication:latest .
-docke tag smapleapplication docker-reg.cmog.org/smapleapplication:latest
-docker push docker-reg.cmog.org/smapleapplication:latest*/
+
 pipeline {
    agent any
 
    stages {
       stage('Verify Branch') {
          steps {
+            checkout 
             echo "$GIT_BRANCH"
          }
       }
@@ -24,9 +23,8 @@ pipeline {
       stage('Approve PROD Deploy') {
          when {
             expression {
-              
-               env.GIT_BRANCH == 'origin/master'
-        //return env.BRANCH_NAME != 'master';
+            env.GIT_BRANCH == 'origin/master'
+            //return env.BRANCH_NAME != 'master';
             }
             //branch 'origin/master'
          }
@@ -34,7 +32,7 @@ pipeline {
             timeout(time: 1, unit: 'HOURS') 
          }
          steps {
-            input message: "Deploy?"
+            input message: "Can I Deploy into PROD?"
          }
          post {
             success {
@@ -43,6 +41,20 @@ pipeline {
             aborted {
                echo "Production Deploy Denied"
             }
+         }
+      }
+      stage('Deploy')
+      {
+         environment {
+       registry = "magalixcorp/k8scicd"
+         }
+         steps{
+            script
+            {
+             def image_id = registry + ":$BUILD_NUMBER"
+             echo 'image_id'
+            }
+
          }
       }
        

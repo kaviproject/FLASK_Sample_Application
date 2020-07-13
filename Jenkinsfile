@@ -18,7 +18,7 @@ pipeline {
                  bat 'docker image build -t smapleapplication:latest .'
                  bat 'docker tag smapleapplication docker-reg.cmog.org/smapleapplication:latest'
               
-                withDockerRegistry(credentialsId: 'f8f116f2-c942-44bc-8a76-a3e99b834f54', url: 'https://docker-reg.cmog.org') {
+                withDockerRegistry(credentialsId: '2c6039d2-6523-4346-aef2-6047c30720a3', url: 'https://docker-reg.cmog.org') {
                      bat 'docker push docker-reg.cmog.org/smapleapplication:latest'
                 }
               

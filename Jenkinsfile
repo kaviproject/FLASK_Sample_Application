@@ -45,14 +45,14 @@ pipeline {
       }
      stage('Deploy')
       {
-         environment {
+      environment {
        registry = "magalixcorp/k8scicd"
          }
          steps{
             script
             {
              def image_id = registry + ":$BUILD_NUMBER"
-             echo 'image_id'
+             echo '$image_id'
             }
 
          }

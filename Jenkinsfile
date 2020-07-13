@@ -5,7 +5,7 @@ pipeline {
    stages {
       stage('Verify Branch') {
          steps {
-            checkout 
+           // checkout 
             echo "$GIT_BRANCH"
          }
       }
@@ -43,7 +43,7 @@ pipeline {
             }
          }
       }
-     /* stage('Deploy')
+     stage('Deploy')
       {
          environment {
        registry = "magalixcorp/k8scicd"
@@ -56,8 +56,7 @@ pipeline {
             }
 
          }
-      }*/
-       
+      }      
    }
    post {
         always {
